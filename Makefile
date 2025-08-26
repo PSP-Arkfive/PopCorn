@@ -1,6 +1,9 @@
 TARGET = popcorn
 
-OBJS = main.o src/libcrypt.o src/icon.o
+OBJS = main.o \
+	src/icon.o \
+	src/syspatch.o \
+	src/libcrypt.o \
 
 all: $(TARGET).prx
 INCDIR = external/include
