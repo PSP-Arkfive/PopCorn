@@ -5,8 +5,11 @@ OBJS = main.o \
 	src/syspatch.o \
 	src/libcrypt.o \
 
+PSPSDK = $(shell psp-config --pspsdk-path)
+ARKSDK ?= external
+
 all: $(TARGET).prx
-INCDIR = external/include
+INCDIR = $(ARKSDK)/include
 CFLAGS = -std=c99 -Os -G0 -Wall -fno-pic
 
 ifdef DEBUG
@@ -24,9 +27,8 @@ PRX_EXPORTS = exports.exp
 USE_KERNEL_LIBC=1
 USE_KERNEL_LIBS=1
 
-LIBDIR = external/libs
+LIBDIR = $(ARKSDK)/libs
 LDFLAGS = -nostartfiles
 LIBS = -lpspsystemctrl_kernel
 
-PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
