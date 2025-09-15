@@ -76,9 +76,9 @@ static int getKeysBinPath(char *keypath, unsigned int size);
 // Save keys.bin
 static int saveKeysBin(const char *keypath, unsigned char *key, int size);
 
-static void patchPops(SceModule2 *mod);
+static void patchPops(SceModule *mod);
 
-int popcornSyspatch(SceModule2 *mod)
+int popcornSyspatch(SceModule *mod)
 {
     #if DEBUG >= 3
     printk("%s: %s\r\n", __func__, mod->modname);
@@ -763,7 +763,7 @@ static int getRifPatch(char *name, char *path)
 
 void patchPopsMgr(void)
 {
-    SceModule2 *mod = (SceModule2*) sceKernelFindModuleByName("scePops_Manager");
+    SceModule *mod = (SceModule*) sceKernelFindModuleByName("scePops_Manager");
     unsigned int text_addr = mod->text_addr;
     int i;
     
@@ -1114,7 +1114,7 @@ int decompressData(unsigned int destSize, const unsigned char *src, unsigned cha
     return ret;
 }
 
-static void patchPops(SceModule2 *mod)
+static void patchPops(SceModule *mod)
 {
     unsigned int text_addr = mod->text_addr;
     void* scePopsMan_0090B2C8_stub = (void*)sctrlFindImportByNID(mod, "scePopsMan", 0x0090B2C8);

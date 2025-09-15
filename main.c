@@ -33,7 +33,7 @@ extern unsigned int g_pspFwVersion;
 extern int g_isCustomPBP;
 extern int g_icon0Status;
 
-extern int popcornSyspatch(SceModule2 *mod);
+extern int popcornSyspatch(SceModule *mod);
 extern void patchPopsMgr(void);
 extern void getKeys(void);
 extern void readCustomConfig();
