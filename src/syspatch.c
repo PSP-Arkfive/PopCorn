@@ -78,7 +78,7 @@ static int saveKeysBin(const char *keypath, unsigned char *key, int size);
 
 static void patchPops(SceModule *mod);
 
-int popcornSyspatch(SceModule *mod)
+void popcornSyspatch(SceModule *mod)
 {
     #if DEBUG >= 3
     printk("%s: %s\r\n", __func__, mod->modname);
@@ -91,10 +91,8 @@ int popcornSyspatch(SceModule *mod)
 
     if(g_previous)
     {
-        return g_previous(mod);
+        g_previous(mod);
     }
-
-    return 0;
 }
 
 struct FunctionHook
