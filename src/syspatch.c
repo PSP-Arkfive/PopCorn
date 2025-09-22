@@ -63,6 +63,12 @@ typedef struct
     u32 psar_offset;
 } PBPHeader;
 
+struct FunctionHook
+{
+    unsigned int nid;
+    void *fp;
+};
+
 // custom emulator config
 static u8 custom_config[0x400];
 static int config_size = 0;
@@ -78,7 +84,7 @@ static int saveKeysBin(const char *keypath, unsigned char *key, int size);
 
 static void patchPops(SceModule *mod);
 
-void popcornSyspatch(SceModule *mod)
+int popcornSyspatch(SceModule *mod)
 {
     #if DEBUG >= 3
     printk("%s: %s\r\n", __func__, mod->modname);
@@ -91,15 +97,11 @@ void popcornSyspatch(SceModule *mod)
 
     if(g_previous)
     {
-        g_previous(mod);
+        return g_previous(mod);
     }
+    
+    return 0;
 }
-
-struct FunctionHook
-{
-    unsigned int nid;
-    void *fp;
-};
 
 static const char *getFileBasename(const char *path)
 {
