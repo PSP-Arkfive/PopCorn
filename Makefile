@@ -1,3 +1,5 @@
+PSPSDK = $(shell psp-config --pspsdk-path)
+
 TARGET = popcorn
 
 OBJS = main.o \
@@ -5,11 +7,8 @@ OBJS = main.o \
 	src/syspatch.o \
 	src/libcrypt.o \
 
-PSPSDK = $(shell psp-config --pspsdk-path)
-ARKSDK ?= ../ark-dev-sdk
-
 all: $(TARGET).prx
-INCDIR = $(ARKSDK)/include
+INCDIR = 
 CFLAGS = -std=c99 -Os -G0 -Wall -fno-pic
 
 ifdef DEBUG
@@ -27,7 +26,7 @@ PRX_EXPORTS = exports.exp
 USE_KERNEL_LIBC=1
 USE_KERNEL_LIBS=1
 
-LIBDIR = $(ARKSDK)/libs
+LIBDIR = 
 LDFLAGS = -nostartfiles
 LIBS = -lpspsystemctrl_kernel
 
